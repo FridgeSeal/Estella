@@ -3,6 +3,7 @@ name = "Estella"
 version = "0.1.0"
 authors = ["Tom Watson <tom_w@fastmail.com>", "steiner.jared1996@gmail.com"]
 edition = "2018"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
