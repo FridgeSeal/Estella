@@ -1,0 +1,23 @@
+[package]
+name = "Estella"
+version = "0.1.0"
+authors = ["Tom Watson <tom_w@fastmail.com>", "steiner.jared1996@gmail.com"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4.14"
+simplelog = "0.10.0"
+config = "0.11.0"
+serde = { version = "1.0.124", features = ["derive"] }
+serde_yaml = "0.8.17"
+itertools = "0.10.0"
+anyhow = "1.0.38"
+xxhash-rust = { version = "0.8.2", features = ["xxh3"]}
+tokio = { version = "1.6.1", features = ["full"] }
+poldercast = "1.2.0"
+sled = "0.34.6"
+
+[profile.release]
+lto = true
