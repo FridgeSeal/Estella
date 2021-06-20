@@ -37,7 +37,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ github.workflow }}-${{ github.sha }}
 
   lint-release:
-    needs: build
+    needs: build-release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -74,7 +74,7 @@ jobs:
           args: '--release'
 
   test-release:
-    needs: build
+    needs: build-release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
