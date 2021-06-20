@@ -1,7 +1,7 @@
 use anyhow;
 use log;
 use simplelog::{Config, LevelFilter, TermLogger, TerminalMode};
-    
+
 mod settings;
 use settings::Settings;
 
