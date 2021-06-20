@@ -25,7 +25,12 @@ jobs:
       - name: Restore Build Cache
         uses: actions/cache@v2
         with:
-          path: target
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
           key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
 
       - name: Build
@@ -37,7 +42,12 @@ jobs:
       - name: Save Build Cache
         uses: actions/cache@v2
         with:
-          path: target/
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
           key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
 
   lint:
@@ -50,7 +60,12 @@ jobs:
       - name: Restore Build Cache
         uses: actions/cache@v2
         with:
-          path: target
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
           key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
 
       - name: Rust Toolchain
@@ -88,7 +103,12 @@ jobs:
       - name: Restore Build Cache
         uses: actions/cache@v2
         with:
-          path: target/
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
           key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
       
       - name: Rust Toolchain
