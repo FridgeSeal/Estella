@@ -32,7 +32,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target/
-          key: ${{ runner.os }}-build-${{ env.GITHUB_JOB }}
+          key: ${{ runner.os }}-build-${{ env.GITHUB_SHA }}
 
   lint:
     needs: build
@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target
-          key: ${{ runner.os }}-build-${{ env.GITHUB_JOB }}
+          key: ${{ runner.os }}-build-${{ env.GITHUB_SHA }}
 
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
@@ -83,7 +83,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target/
-          key: ${{ runner.os }}-build-${{ env.GITHUB_JOB }}
+          key: ${{ runner.os }}-build-${{ env.GITHUB_SHA }}
       
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
