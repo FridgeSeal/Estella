@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  build:
+  build-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -36,7 +36,7 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ github.workflow }}-${{ github.sha }}
 
-  lint:
+  lint-release:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -73,7 +73,7 @@ jobs:
           command: clippy 
           args: '--release'
 
-  test:
+  test-release:
     needs: build
     runs-on: ubuntu-latest
     steps:
