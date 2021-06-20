@@ -13,7 +13,7 @@ fn main() -> anyhow::Result<()> {
         simplelog::ColorChoice::Always,
     )?;
     log::info!("Starting up...");
-    let cfg = Settings::new()?;
+    Settings::new()?;
     log::info!("Setup Config");
     Ok(())
 }
