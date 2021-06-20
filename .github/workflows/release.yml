@@ -1,6 +1,6 @@
 name: Release
 
-on: [push, pull_request]
+on: pull_request
 
 jobs:
 
@@ -16,13 +16,13 @@ jobs:
           profile: minimal
           toolchain: stable
 
-      - name: Release Build
+      - name: Build Release
         uses: actions-rs/cargo@v1
         with:
           command: build
           args:  '--release'
 
-      - name: Save Build Cache
+      - name: Save Release Build Cache
         uses: actions/cache@v2
         with:
           path: |
@@ -40,7 +40,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Restore Build Cache
+      - name: Restore Release Build Cache
         uses: actions/cache@v2
         with:
           path: |
@@ -64,7 +64,7 @@ jobs:
           command: fmt
           args: '--all -- --check'
       
-      - name: Release Clippy Check
+      - name: Clippy Check Release
         uses: actions-rs/cargo@v1
         with:
           command: clippy 
@@ -77,7 +77,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Restore Build Cache
+      - name: Restore Release Build Cache
         uses: actions/cache@v2
         with:
           path: |
@@ -94,7 +94,7 @@ jobs:
           profile: minimal
           toolchain: stable
 
-      - name: Release Test
+      - name: Test Release
         uses: actions-rs/cargo@v1
         with:
           command: test
