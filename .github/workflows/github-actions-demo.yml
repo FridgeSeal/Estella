@@ -21,7 +21,6 @@ jobs:
         with:
           profile: minimal
           toolchain: stable
-          override: true
 
       - name: Build
         uses: actions-rs/cargo@v1
@@ -33,7 +32,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('src/**') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
 
   lint:
     needs: build
@@ -46,14 +45,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('src/**') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
 
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
-          override: true
           components: 'rustfmt, clippy'
 
       - name: Format Check
@@ -84,14 +82,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('src/**') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
       
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
-          override: true
 
       - name: Test
         uses: actions-rs/cargo@v1
