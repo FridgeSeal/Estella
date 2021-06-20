@@ -1,7 +1,7 @@
 use anyhow;
 use log;
 use simplelog::{Config, LevelFilter, TermLogger, TerminalMode};
-    
+
 mod settings;
 use settings::Settings;
 
@@ -13,7 +13,7 @@ fn main() -> anyhow::Result<()> {
         simplelog::ColorChoice::Always,
     )?;
     log::info!("Starting up...");
-    let cfg = Settings::new()?;
+    Settings::new()?;
     log::info!("Setup Config");
     Ok(())
 }
