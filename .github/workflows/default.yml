@@ -48,7 +48,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             target/
-          key: ${{ runner.os }}-cargo-${{ github.sha }}
+          key: ${{ runner.os }}-cargo-${{ github.workflow }}-${{ github.sha }}
 
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
@@ -84,7 +84,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             target/
-          key: ${{ runner.os }}-cargo-${{ github.sha }}
+          key: ${{ runner.os }}-cargo-${{ github.workflow }}-${{ github.sha }}
       
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
