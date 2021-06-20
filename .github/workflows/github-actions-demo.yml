@@ -9,9 +9,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-latest
+          #- os: macos-latest
           - os: ubuntu-latest
-          - os: windows-latest
+          #- os: windows-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -32,13 +32,8 @@ jobs:
       - name: Save Cache
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./**') }}
+          path: target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('src/**') }}
 
   lint:
     needs: build
@@ -50,13 +45,8 @@ jobs:
       - name: Restore Cache
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./**') }}
+          path: target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('src/**') }}
 
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
@@ -83,9 +73,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-latest
+          #- os: macos-latest
           - os: ubuntu-latest
-          - os: windows-latest
+          #- os: windows-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -93,13 +83,8 @@ jobs:
       - name: Restore Cache
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('./**') }}
+          path: target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('src/**') }}
       
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
