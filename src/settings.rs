@@ -4,8 +4,8 @@ use std::env;
 
 #[derive(Debug, Deserialize)]
 pub struct Settings {
-    pub data_path: String, // Local path for sled data store
-    pub peer_discovery_src: String // later a list of urls or ips that the application can use to discover peers
+    pub data_path: String,          // Local path for sled data store
+    pub peer_discovery_src: String, // later a list of urls or ips that the application can use to discover peers
 }
 
 impl Settings {
