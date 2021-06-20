@@ -22,13 +22,19 @@ jobs:
           profile: minimal
           toolchain: stable
 
+      - name: Restore Build Cache
+        uses: actions/cache@v2
+        with:
+          path: target
+          key: ${{ runner.os }}-build-${{ hashFiles('src/**') }}
+
       - name: Build
         uses: actions-rs/cargo@v1
         with:
           command: build
           args: '--release'
 
-      - name: Save Cache
+      - name: Save Build Cache
         uses: actions/cache@v2
         with:
           path: target/
@@ -41,7 +47,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Restore Cache
+      - name: Restore Build Cache
         uses: actions/cache@v2
         with:
           path: target
@@ -79,7 +85,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Restore Cache
+      - name: Restore Build Cache
         uses: actions/cache@v2
         with:
           path: target/
