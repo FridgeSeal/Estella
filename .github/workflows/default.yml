@@ -64,11 +64,11 @@ jobs:
         with:
           command: fmt
           args: '--all -- --check'
-      
+
       - name: Clippy Check
         uses: actions-rs/cargo@v1
         with:
-          command: clippy 
+          command: clippy
 
   test:
     needs: build
@@ -87,7 +87,7 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ github.workflow }}-${{ github.sha }}
-      
+
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
