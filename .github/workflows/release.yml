@@ -1,6 +1,6 @@
 name: Release
 
-on: 
+on:
   pull_request:
   push:
     branches: [master]
@@ -66,11 +66,11 @@ jobs:
         with:
           command: fmt
           args: '--all -- --check'
-      
+
       - name: Clippy Check Release
         uses: actions-rs/cargo@v1
         with:
-          command: clippy 
+          command: clippy
           args: '--release'
 
   test-release:
@@ -90,7 +90,7 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ github.workflow }}-${{ github.sha }}
-      
+
       - name: Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
