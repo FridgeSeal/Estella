@@ -1,6 +1,4 @@
-use anyhow;
 use clap::Clap;
-use log;
 use simplelog::{Config, LevelFilter, TermLogger, TerminalMode};
 
 mod cli;
