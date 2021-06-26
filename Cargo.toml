@@ -19,6 +19,11 @@ xxhash-rust = { version = "0.8.2", features = ["xxh3"]}
 tokio = { version = "1.6.1", features = ["full"] }
 poldercast = "1.2.0"
 sled = "0.34.6"
+clap = "3.0.0-beta.2"
+
+[[bin]]
+name = "estanley"
+path = "src/main.rs"
 
 [profile.release]
 lto = true
