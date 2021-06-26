@@ -9,25 +9,24 @@ use crate::cli::Opts;
 
 fn main() -> anyhow::Result<()> {
     let opts = Opts::parse();
-    let setings = Settings::new(opts)?;
-
     TermLogger::init(
-        log_level(&setings),
+        log_level(&opts),
         Config::default(),
         TerminalMode::Mixed,
         simplelog::ColorChoice::Always,
     )?;
     log::info!("Starting up...");
 
+    let setings = Settings::new(opts)?;
     log::info!("Setup Config {:#?}", setings);
 
     Ok(())
 }
 
-fn log_level(settings: &Settings) -> LevelFilter {
-    if settings.debug {
+fn log_level(opts: &Opts) -> LevelFilter {
+    if opts.debug {
         LevelFilter::Debug
-    } else if settings.quiet {
+    } else if opts.quiet {
         LevelFilter::Error
     } else {
         LevelFilter::Info

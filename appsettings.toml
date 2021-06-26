@@ -1,6 +1,3 @@
-debug = "false"
-quiet = "false"
-
 [data]
 path = "data/"
 

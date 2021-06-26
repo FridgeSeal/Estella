@@ -17,8 +17,6 @@ pub struct Data {
 
 #[derive(Debug, Deserialize)]
 pub struct Settings {
-    pub debug: bool,
-    pub quiet: bool,
     pub data: Data,
     pub peers: Peers,
 }
@@ -45,14 +43,6 @@ impl Settings {
 }
 
 fn include_cli_opts(s: &mut Config, opts: Opts) -> Result<(), ConfigError> {
-    if opts.debug {
-        s.set("debug", true)?;
-    }
-
-    if opts.quiet {
-        s.set("quiet", true)?;
-    }
-
     if let Some(d) = opts.data_path {
         s.set("data.path", d)?;
     }
