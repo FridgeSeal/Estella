@@ -1,6 +1,7 @@
 use blip::Mesh;
 use clap::Clap;
 use log::info;
+use rand::Rng;
 use simplelog::{Config, LevelFilter, TermLogger, TerminalMode};
 use std::net::SocketAddr;
 
@@ -23,12 +24,11 @@ async fn main() -> anyhow::Result<()> {
     info!("Setup Config. Starting mesh");
     let mesh = Mesh::low_latency();
     info!("Low-latency-mesh setup");
-    let listen_addr = match config.serve_address {
-        Some(addr) => addr,
-        None => {
-            let default_serve_adr: SocketAddr = "[::1]:8901".parse()?;
-            default_serve_adr
-        }
+    let listen_addr = {
+        let mut rng = rand::thread_rng();
+        let mut default_serve_adr: SocketAddr = "[::1]:1234".parse()?;
+        default_serve_adr.set_port(rng.gen_range(1024..65000));
+        default_serve_adr
     };
     log::info!("Listening on port: {}", listen_addr.port());
     if let Some(peer_sock_addr) = config.peers.address {

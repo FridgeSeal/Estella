@@ -22,6 +22,5 @@ pub struct Opts {
 
     /// ipv6 address to serve on, defaults to ipv6 loopback
     #[clap(long)]
-    pub serve_addr: Option<String>, // TODO: use the URL crates ability to
-                                    // parse url/ip's directly
+    pub serve_addr: Option<String>,
 }
