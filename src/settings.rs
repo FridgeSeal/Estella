@@ -1,12 +1,12 @@
 use crate::cli::Opts;
 use config::{Config, ConfigError, Environment, File};
 use serde::Deserialize;
-use std::env;
+use std::{env, net::SocketAddr};
 
 #[derive(Debug, Deserialize)]
 pub struct Peers {
     /// later a list of urls or ips that the application can use to discover peers
-    pub source: String,
+    pub address: Option<SocketAddr>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -19,8 +19,7 @@ pub struct Data {
 pub struct Settings {
     pub data: Data,
     pub peers: Peers,
-    pub serve_path: String,
-    pub serve_port: u16
+    pub serve_address: Option<SocketAddr>,
 }
 
 impl Settings {
@@ -49,8 +48,12 @@ fn include_cli_opts(s: &mut Config, opts: Opts) -> Result<(), ConfigError> {
         s.set("data.path", d)?;
     }
 
-    if let Some(p) = opts.peer_src {
-        s.set("peers.source", p)?;
+    if let Some(p) = opts.peer_addr {
+        s.set("peers.address", p)?;
+    }
+
+    if let Some(srv_addr) = opts.serve_addr {
+        s.set("serve_address", srv_addr)?;
     }
 
     Ok(())
