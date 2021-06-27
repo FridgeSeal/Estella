@@ -18,8 +18,13 @@ anyhow = "1.0.38"
 xxhash-rust = { version = "0.8.2", features = ["xxh3"]}
 tokio = { version = "1.7.1", features = ["full"] }
 sled = "0.34.6"
+clap = "3.0.0-beta.2"
 lfchring = "0.1.3"
 blip = { git = "https://github.com/FridgeSeal/blip"}
+
+[[bin]]
+name = "estanley"
+path = "src/main.rs"
 
 [profile.release]
 lto = true
