@@ -19,6 +19,8 @@ pub struct Data {
 pub struct Settings {
     pub data: Data,
     pub peers: Peers,
+    pub serve_path: String,
+    pub serve_port: u16
 }
 
 impl Settings {
