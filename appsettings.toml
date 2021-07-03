@@ -1,5 +1,7 @@
+serve_address = "[::1]:6789"
+
 [data]
 path = "data/"
 
 [peers]
-source = "placeholder_value"
+# address = "[::1]:14430"

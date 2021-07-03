@@ -16,7 +16,11 @@ pub struct Opts {
     #[clap(long)]
     pub data_path: Option<String>,
 
-    /// Source to discover peers
+    /// Optional address of peer node
     #[clap(long)]
-    pub peer_src: Option<String>,
+    pub peer_addr: Option<String>,
+
+    /// ipv6 address to serve on, defaults to ipv6 loopback
+    #[clap(long)]
+    pub serve_addr: Option<String>,
 }
