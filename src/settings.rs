@@ -17,6 +17,7 @@ pub struct Data {
 
 #[derive(Debug, Deserialize)]
 pub struct Settings {
+    pub use_tls: bool,
     pub data: Data,
     pub peers: Peers,
     pub serve_address: Option<SocketAddr>,
