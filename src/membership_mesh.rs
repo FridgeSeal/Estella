@@ -28,3 +28,41 @@ pub async fn boostrap(
     let mem_tree = db.open_tree("members")?;
     info!("membership data tree opened");
     let mesh = Mesh::low_latency();
+    info!("Attempting to start low-latency mesh");
+    let listen_addr = acquire_local_address();
+    log::info!("Listening on port: {}", listen_addr.port());
+    let (r_map, mut w_map) = evmap::new();
+    let live_peer_map = PeerMesh { member_map: w_map };
+    let mesh_future = match reconcile_addrs(listen_addr, &cfg.peers.address, None) {
+        StartupMode::Solo => mesh.serve(listen_addr),
+        StartupMode::JoinCluster(peer_addr) => {
+            mesh.join_seed(peer_addr, cfg.use_tls).serve(listen_addr)
+        }
+    };
+    mesh_future.await; // Send this to a specific thread
+    Ok(("placehold_thread_handle_name".to_string(), r_map))
+}
+
+fn acquire_local_address() -> SocketAddr {
+    let mut rng = rand::thread_rng();
+    let base_addr = Ipv6Addr::LOCALHOST;
+    let rand_port = rng.gen_range(1024..65000);
+    let socket_addr = SocketAddr::new(IpAddr::V6(base_addr), rand_port);
+    socket_addr
+}
+
+enum StartupMode {
+    Solo,
+    JoinCluster(SocketAddr),
+}
+
+fn reconcile_addrs(
+    local_addr: SocketAddr,
+    cfg_addr: &Option<SocketAddr>,
+    pre_existing: Option<Vec<SocketAddr>>,
+) -> StartupMode {
+    // Used to simplify startup config by reconciling all local and provided and cached/stored addresses
+    // removes it own, and attempts to connect to the remaining. If there are no remaining addresses, it will signal to
+    // thus start up in solo/single-node mode, and wait for incorming connections.
+    unimplemented!() // TODO
+}
