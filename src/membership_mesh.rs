@@ -66,3 +66,60 @@ fn reconcile_addrs(
     // thus start up in solo/single-node mode, and wait for incorming connections.
     unimplemented!() // TODO
 }
+
+#[derive(Debug, Hash, PartialEq, Eq, Clone)]
+pub enum MeshKey {
+    LiveMembers,
+    CutMembers,
+    KickedMembers,
+}
+
+#[derive(Debug, Hash, PartialEq, Eq, Clone)]
+pub struct PeerNode {
+    pub addr: SocketAddr,
+    pub name: String,
+    pub last_seen: chrono::DateTime<Utc>,
+    // pub channel: transport::Channel,
+}
+
+impl PeerNode {
+    fn open_channel(&self) -> Channel {
+        unimplemented!() // TODO
+    }
+}
+
+struct PeerMesh {
+    member_map: WriteHandle<MeshKey, Vec<PeerNode>>,
+}
+
+#[blip::async_trait]
+impl MeshService for PeerMesh {
+    async fn accept(self: Box<Self>, mut cuts: Subscription) {
+        while let Ok(cut) = cuts.recv().await {
+            // handle membership change
+            let m = cut.members();
+            let j = cut.joined();
+            let k = cut.kicked();
+            dbg!(&m, &j, &k);
+        }
+    }
+}
+
+impl PeerMesh {
+    fn cas(&mut self, member_type: MeshKey, member_arr: &[Member]) {
+        self.member_map
+            .update(member_type, member_arr.iter().map(|x| x.into()).collect())
+            .refresh();
+    }
+}
+
+impl From<Member> for PeerNode {
+    fn from(m: Member) -> Self {
+        Self {
+            addr: m.addr(),
+            name: String::from_utf8(m.metadata()["name"]).unwrap(), // unwrap because we _promise_ the value is legit. lol.
+            last_seen: chrono::Utc::now(),
+            // channel: m.channel(),
+        }
+    }
+}
